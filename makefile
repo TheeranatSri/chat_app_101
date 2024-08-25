@@ -1,7 +1,7 @@
 # Makefile for chat_app
 # Variables
 CONDA_ENV = chat_app
-BACKEND_DIR = backend
+BACKEND_DIR = backend/app
 FRONTEND_DIR = frontend
 
 # Default target
@@ -17,15 +17,13 @@ help:
 # Backend
 .PHONY: setup-backend
 setup-backend:
-	@echo "Setting up the backend environment with Conda and Poetry..."
+	@echo "Setting up the backend environment with Conda"
 	conda env create -f $(BACKEND_DIR)/environment.yml
-	@echo "Activating Conda environment and installing dependencies with Poetry..."
-	conda activate $(CONDA_ENV) && cd $(BACKEND_DIR)
 
 .PHONY: run-backend
 run-backend:
-	@echo "Running the backend server with Poetry..."
-	conda activate $(CONDA_ENV) && cd $(BACKEND_DIR) && uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+	@echo "Running the backend server"
+	conda activate $(CONDA_ENV)  cd $(BACKEND_DIR) && uvicorn fastapi run main.py
 
 # Frontend
 .PHONY: setup-frontend
@@ -37,8 +35,3 @@ setup-frontend:
 run-frontend:
 	@echo "Running the frontend server..."
 	cd $(FRONTEND_DIR) && npm run dev
-
-#.PHONY: build-frontend
-#build-frontend:
-#	@echo "Building the frontend for production..."
-#	cd $(FRONTEND_DIR) && npm run build
