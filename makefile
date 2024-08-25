@@ -23,7 +23,7 @@ setup-backend:
 .PHONY: run-backend
 run-backend:
 	@echo "Running the backend server"
-	conda activate $(CONDA_ENV)  cd $(BACKEND_DIR) && uvicorn fastapi run main.py
+	conda activate $(CONDA_ENV)  cd $(BACKEND_DIR) && fastapi run main.py
 
 # Frontend
 .PHONY: setup-frontend
