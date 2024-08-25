@@ -35,9 +35,8 @@ npm install
 ### 4. Running the Application
 a. Run the Backend Server
 ```bash
-cd ../backend
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload 
-```
+cd ../backend/app
+fastapi run main.py
 b. Run the Frontend Development Server
 ```bash
 cd ../frontend
