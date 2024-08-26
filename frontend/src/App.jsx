@@ -1,9 +1,50 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function generateRandomSessionId(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+// Example usage:
+if (!getCookie('session_id')) {
+    const randomSessionId = generateRandomSessionId(16); // Generates a random 16-character session ID
+    setCookie('session_id', randomSessionId, 7); // Set the 'session_id' cookie with an expiration of 7 days
+    console.log('Session ID set:', getCookie('session_id'));
+} else {
+    console.log('Session ID already exists:', getCookie('session_id'));
+}
+
+
+
+// Example usage:
+
 function App() {
   const [query, setQuery] = useState('');
   const [messages, setMessages] = useState([]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
