@@ -1,7 +1,7 @@
 # Makefile for chat_app
 # Variables
 CONDA_ENV = chat_app
-BACKEND_DIR = backend/app
+BACKEND_DIR = backend
 FRONTEND_DIR = frontend
 
 # Default target
